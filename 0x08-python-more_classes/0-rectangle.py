@@ -4,4 +4,4 @@
 
 class Rectangle:
     """Placeholder statement indicating no action."""
-    passs
+    pass
