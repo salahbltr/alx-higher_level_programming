@@ -1,17 +1,21 @@
 #!/usr/bin/python3
-"""Get the 10 latest commit"""
+"""Python script that takes 2 arguments in order to solve this challenge."""
+import requests
+import sys
+
 
 if __name__ == "__main__":
-    import requests
-    import sys
-
-    r = requests.get('https://api.github.com/repos/{}/{}/commits'
-                      .format(sys.argv[2], sys.argv[1]))
-    result = r.json()
+    name = sys.argv[1]
+    owner = sys.argv[2]
+    url = f"https://api.github.com/repos/{owner}/{name}/commits"
+    r = requests.get(url)
+    list_obj = r.json()
+    i = 0
     try:
-        for i in range(10):
-            print("{}: {}".format(
-                  result[i].get("sha"),
-                  result[i].get("commit").get("author").get("name")))
+        while i < 10:
+            sha = list_obj[i].get('sha')
+            author = list_obj[i].get('commit').get('author').get('name')
+            print(f"{sha}: {author}")
+            i = i + 1
     except IndexError:
         pass
