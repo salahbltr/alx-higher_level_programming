@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""get properties from mail"""
+"""Python script that takes GitHub credentials,
+and uses the GitHub API to display id"""
+import requests
+import sys
 
-if __name__ == '__main__':
-    import requests
-    import sys
 
-    headers = {}
-    headers['Authorization'] = '{} {}'.format(sys.argv[0], sys.argv[1])
-    r = requests.get('https://api.github.com/users/{}'
-                     .format(sys.argv[1]), headers=headers)
-    print(r.json().get('id'))
+if __name__ == "__main__":
+    name = sys.argv[1]
+    passwd = sys.argv[2]
+    r = requests.get('https://api.github.com/user', auth=(name, passwd))
+    data = r.json()
+    print(data.get("id"))
