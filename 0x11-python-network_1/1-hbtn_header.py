@@ -1,10 +1,3 @@
-#!/usr/bin/python3
-"""response heade value"""
-
-if __name__ == '__main__':
-    import urllib.request
-    import sys
-
-    request = urllib.request.Request(sys.argv[1])
-    with urllib.request.urlopen(request) as result:
-        print(dict(result.headers)['X-Request-Id'])
+#!/bin/bash
+# Bash script that takes in a URL, sends a GET request to the URL, and displays the body of the response
+curl -sL "$1"
